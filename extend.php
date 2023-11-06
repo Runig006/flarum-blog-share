@@ -13,6 +13,7 @@ use Runig006\FlarumBlogShare\Api\Controller\CreateShareController;
 use Runig006\FlarumBlogShare\Api\Controller\EditShareController;
 use Runig006\FlarumBlogShare\Api\Serializer\ShareSerializer;
 use Runig006\FlarumBlogShare\Console\ShareArticleCommand;
+use Runig006\FlarumBlogShare\Console\ShareArticleShedule;
 
 return [
     (new Extend\Locales(__DIR__ . '/locale')),
@@ -51,5 +52,6 @@ return [
         ->listen(BlogMetaSaving::class, BlogMetaSaveListener::class),
 
     (new Extend\Console)
-        ->command(ShareArticleCommand::class),
+        ->command(ShareArticleCommand::class)
+        ->schedule(ShareArticleCommand::class, new ShareArticleShedule()),
 ];
