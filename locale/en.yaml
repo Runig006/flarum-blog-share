@@ -1,0 +1,40 @@
+runig006-blog-share:
+  admin:
+    share: "Blog Share"
+    permissions:
+      auto_share: "Allow to automatically share articles"
+    settings:
+      telegram_enabled: Enable Telegram
+      telegram_token:
+        label: Bot Token
+        help: Telegram Bot token, is given to the bot creator at the end of the process with BotFather
+      telegram_chat_id:
+        label: Chat ID
+        help: Chat ID where the bot is located and where it has to write the messages
+      telegram_buttons_per_row: 
+        label: Buttons per row (Default)
+        help: Number of buttons that will appear per row by default
+  forum:
+    buttons:
+      telegram: Telegram AutoShare
+
+    share_settings:
+      title: AutoShare
+      telegram:
+        share: Share in Telegram
+        title:
+          label: Alternate Title
+          help: If not set it will use the default
+        body:
+          label: Alternate Body
+          help: If not set it will use the default
+        button_text:
+          label: Texts for extra buttons
+          help: If you need multiple buttons, separete the texts with commas
+        button_url:
+          label: Urls for the extra buttons
+          help: If you need multiple buttons, separete the url with commas. They NEED to have the same numbers in texts and in urls
+        button_rows:
+          label: Custom Rows
+          help: If you want to custom the number of buttons per row. Separete the numbers of buttons per row with commas
+        

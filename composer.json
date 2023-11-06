@@ -1,0 +1,36 @@
+{
+  "name": "runig006/flarum-blog-share",
+  "description": "Allow to automatic share the lastest news of your forum",
+  "version": "1.0.0",
+  "type": "flarum-extension",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alex Osendi García",
+      "email": "alexcomputer14@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Runig006\\FlarumBlogShare\\": "src/"
+    }
+  },
+  "require": {
+    "v17development/flarum-blog": "*",
+    "telegram-bot/api": "*"
+  },
+  "extra": {
+    "flarum-extension": {
+      "title": "Blog Share",
+      "category": "feature",
+      "icon": {
+        "name": "fas fa-share",
+        "backgroundColor": "#ff7700",
+        "color": "#ffffff"
+      }
+    },
+    "branch-alias": {
+      "dev-master": "0.6.x-dev"
+    }
+  }
+}
