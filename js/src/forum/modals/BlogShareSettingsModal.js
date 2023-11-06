@@ -13,6 +13,7 @@ export default class BlogShareSettingsModal extends Modal {
   oninit(vnode) {
     let t = this;
     super.oninit(vnode);
+    console.log(this.attrs.discussion.blogShare());
     this.share = this.attrs.discussion && this.attrs.discussion.blogShare() ? this.attrs.discussion.blogShare() : app.store.createRecord('blogShare');
     this[this.attrs.mode + "CreateValues"]();
   }
@@ -178,7 +179,6 @@ export default class BlogShareSettingsModal extends Modal {
   getObject() {
     let object = {};
     object[this.attrs.mode] = {};
-    console.log(Object.keys(this));
     Object.keys(this).forEach((key) => {
       if (key.startsWith(this.attrs.mode)) {
         let cleanKey = key.replace(this.attrs.mode + "_", "");

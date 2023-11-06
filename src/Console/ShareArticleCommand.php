@@ -91,8 +91,11 @@ class ShareArticleCommand extends Command
         $buttons[] = [
             [
                 'text' => 'Ver en el foro',
-                //'url' => $this->urlGenerator->to('forum')->route('blog.post', ['id' => $discussion->id])
-                'url' => 'https://comuesp.com/',
+                'url' => $this->urlGenerator->to('forum')->route('blog.post', [
+                    'id' => $discussion->id,
+                    'slug' => $discussion->slug,
+                ])
+                //'url' => 'https://comuesp.com/',
             ]
         ];
         return new TelegramButton($buttons);
@@ -104,7 +107,10 @@ class ShareArticleCommand extends Command
         $sharing = $discussion->blogShare;
 
         $html = "";
-        $url = $this->urlGenerator->to('forum')->route('blog.post', ['id' => $discussion->id]);
+        $url = $this->urlGenerator->to('forum')->route('blog.post', [
+            'id' => $discussion->id,
+            'slug' => $discussion->slug,
+        ]);
 
         $title = $discussion->title;
         $body = null;
