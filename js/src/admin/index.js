@@ -22,7 +22,7 @@ app.initializers.add('runig006-blog-share', () => {
       type: 'text',
       setting: settingsPrefix + 'telegram_chat_id',
       label: app.translator.trans(settingsTranslation + 'telegram_chat_id.label'),
-      help: app.translator.trans(settingsTranslation + 'telegram_token.help')
+      help: app.translator.trans(settingsTranslation + 'telegram_chat_id.help')
     })
     .registerSetting({
       type: 'text',

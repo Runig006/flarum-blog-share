@@ -17,6 +17,7 @@ class ShareSerializer extends AbstractSerializer
                 'shared' => $share->telegram_shared,
                 'title' => $share->telegram_title,
                 'body' => $share->telegram_body,
+                'image' => $share->telegram_image,
                 'button_text' => $share->telegram_button_text,
                 'button_url' => $share->telegram_button_url,
                 'button_rows' => $share->telegram_button_rows,

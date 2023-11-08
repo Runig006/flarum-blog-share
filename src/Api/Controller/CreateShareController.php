@@ -33,14 +33,18 @@ class CreateShareController extends AbstractCreateController
         $discussionId = Arr::get($data, 'data.relationships.discussion.data.id');
         $discussion = $this->discussionRepository->findOrFail($discussionId, $actor);
 
+
+        $blogShare = $discussion->blogShare ?? new BlogShare();
         $object = [
             'discussion_id' => $discussion->id,
         ];
         $attributes = Arr::get($data, 'data.attributes');
         foreach ($attributes as $mode => $values) {
             foreach ($values as $name => $v)
-                $object[$mode . "_" . $name] = $v;
+                $object[$mode . "_" . $name] = $v ?? null;
         }
-        return BlogShare::create($object);
+        $blogShare->fill($object);
+        $blogShare->save();
+        return $blogShare;
     }
 }

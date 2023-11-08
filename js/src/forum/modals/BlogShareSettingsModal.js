@@ -63,6 +63,7 @@ export default class BlogShareSettingsModal extends Modal {
     this.telegram_share = Stream(this.share?.telegram()?.share, false);
     this.telegram_title = Stream(this.share?.telegram()?.title, null);
     this.telegram_body = Stream(this.share?.telegram()?.body, null);
+    this.telegram_image = Stream(this.share?.telegram()?.image, null);
     this.telegram_button_text = Stream(this.share?.telegram()?.button_text, null);
     this.telegram_button_url = Stream(this.share?.telegram()?.button_url, null);
     this.telegram_button_rows = Stream(this.share?.telegram()?.button_rows, null);
@@ -114,6 +115,59 @@ export default class BlogShareSettingsModal extends Modal {
       </div>,
       -10
     );
+
+    //IMAGE
+    let fofUploadButton = null;
+    if ('fof-upload' in flarum.extensions && app.forum.attribute('fof-upload.canUpload')) {
+      const {
+        components: { Uploader, FileManagerModal },
+      } = require('@fof-upload');
+      const uploader = new Uploader();
+      fofUploadButton = (
+        <Button
+          class="Button Button--icon"
+          onclick={async () => {
+            app.modal.show(
+              FileManagerModal,
+              {
+                uploader: uploader,
+                onSelect: (files) => {
+                  const file = app.store.getById('files', files[0]);
+
+                  this.telegram_image(file.url());
+                },
+              },
+              true
+            );
+          }}
+          icon="fas fa-cloud-upload-alt"
+        />
+      );
+    }
+
+    items.add(
+      'image',
+      <div className="Form-group V17Blog-ArticleImage">
+        <label>{app.translator.trans('v17development-flarum-blog.forum.article_settings.fields.image.title')}:</label>
+        <div data-upload-enabled={!!fofUploadButton}>
+          <input type="text" className="FormControl" bidi={this.telegram_image} placeholder="https://" />
+          {fofUploadButton}
+        </div>
+
+        <small>{app.translator.trans('v17development-flarum-blog.forum.article_settings.fields.image.helper_text')}</small>
+
+        {this.telegram_image()?.length > 2 && (
+          <img
+            src={this.telegram_image()}
+            alt="Article image"
+            title={app.translator.trans('v17development-flarum-blog.forum.article_settings.fields.image.title')}
+            style={{ width: '100%', marginTop: '15px' }}
+          />
+        )}
+      </div>,
+      -10
+    );
+    //END IMAGE
     items.add(
       'telegramButtonText',
       <div className="Form-group">

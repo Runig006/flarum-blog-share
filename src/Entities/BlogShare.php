@@ -14,6 +14,7 @@ class BlogShare extends AbstractModel
         'telegram_share',
         'telegram_title',
         'telegram_body',
+        'telegram_image',
         'telegram_button_text',
         'telegram_button_url',
         'telegram_button_rows',

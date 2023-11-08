@@ -27,8 +27,12 @@ class EditShareController extends AbstractShowController
         $blogShare = BlogShare::findOrFail(Arr::get($data, 'data.id'));
         $attributes = Arr::get($data, 'data.attributes');
         foreach ($attributes as $mode => $values) {
-            foreach ($values as $name => $v)
+            foreach ($values as $name => $v) {
+                if (is_string($v) && empty($v)) {
+                    $v = null;
+                }
                 $object[$mode . "_" . $name] = $v;
+            }
         }
         $blogShare->fill($object);
         $blogShare->save();

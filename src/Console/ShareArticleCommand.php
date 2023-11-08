@@ -92,10 +92,9 @@ class ShareArticleCommand extends Command
             [
                 'text' => 'Ver en el foro',
                 'url' => $this->urlGenerator->to('forum')->route('blog.post', [
-                    'id' => $discussion->id,
-                    'slug' => $discussion->slug,
-                ])
-                //'url' => 'https://comuesp.com/',
+                    'id' => $discussion->id . "-" . $discussion->slug,
+                    
+                ]),
             ]
         ];
         return new TelegramButton($buttons);
@@ -107,20 +106,21 @@ class ShareArticleCommand extends Command
         $sharing = $discussion->blogShare;
 
         $html = "";
-        $url = $this->urlGenerator->to('forum')->route('blog.post', [
-            'id' => $discussion->id,
-            'slug' => $discussion->slug,
-        ]);
 
-        $title = $discussion->title;
-        $body = null;
+        $title = $discussion->title ?? $meta->title;
+        $body = $meta->summary;
+        $image = $meta->featured_image;
 
-        if ($meta->title || $sharing[$check . '_title']) {
-            $title = $meta->title ??  $sharing[$check . '_title'];
+        if ($sharing[$check . '_title']) {
+            $title = $sharing[$check . '_title'];
         }
 
-        if ($meta->summary || $sharing[$check . '_body']) {
-            $body = $meta->summary ??  $sharing[$check . '_body'];
+        if ($sharing[$check . '_body']) {
+            $body = $sharing[$check . '_body'];
+        }
+
+        if ($sharing[$check . '_image']) {
+            $image = $sharing[$check . '_image'];
         }
 
         if ($title) {
@@ -130,7 +130,9 @@ class ShareArticleCommand extends Command
             $html .= $body;
         }
 
-        $html .= "\n\n<a href='$url'>Ver noticia</a>";
+        if ($image) {
+            $html .= "<a href='$image'>&#8205;</a>";
+        }
         return $html;
     }
 }
