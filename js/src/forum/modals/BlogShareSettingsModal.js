@@ -8,12 +8,9 @@ import Switch from 'flarum/common/components/Switch';
 const settingsTranslation = 'runig006-blog-share.forum.share_settings.';
 
 export default class BlogShareSettingsModal extends Modal {
-
-
   oninit(vnode) {
     let t = this;
     super.oninit(vnode);
-    console.log(this.attrs.discussion.blogShare());
     this.share = this.attrs.discussion && this.attrs.discussion.blogShare() ? this.attrs.discussion.blogShare() : app.store.createRecord('blogShare');
     this[this.attrs.mode + "CreateValues"]();
   }
